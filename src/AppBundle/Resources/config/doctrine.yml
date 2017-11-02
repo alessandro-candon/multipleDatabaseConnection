@@ -1,0 +1,38 @@
+
+doctrine:
+    dbal:
+        default_connection: dbone
+        connections:
+            dbone:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "dbone"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+            dbtwo:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "dbtwo"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+
+    orm:
+        default_entity_manager: dbone
+        entity_managers:
+            default:
+                connection: dbone
+                mappings:
+                    AppBundle: ~
+            dbone:
+                connection: dbone
+                mappings:
+                    AppBundle: ~
+
+            dbtwo:
+                connection: dbtwo
+                mappings:
+                    AppBundle: ~

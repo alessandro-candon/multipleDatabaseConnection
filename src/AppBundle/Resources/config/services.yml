@@ -1,0 +1,6 @@
+services:
+    entity.manager.service:
+        class: AppBundle\Service\EntityManagerService
+        arguments:
+          - '@doctrine'
+          - '@session'
