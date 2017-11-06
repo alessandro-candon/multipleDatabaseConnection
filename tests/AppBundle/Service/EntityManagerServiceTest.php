@@ -3,7 +3,10 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\Task;
+use AppBundle\Repository\TaskRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -95,6 +98,47 @@ class EntityManagerServiceTest extends WebTestCase
         ];
     }
 
+    /**
+     * @dataProvider getRepositoryDataProvider
+     * @param $db
+     * @param $expected
+     */
+    public function testGetRepository($db, $expected)
+    {
 
+        $session = new Session(new MockArraySessionStorage());
+        $session->set('db', $db);
+
+        $entityManagerService = new EntityManagerService(
+            self::$container->get('doctrine'),
+            $session
+        );
+
+        $this->assertInstanceOf(
+            TaskRepository::class,
+            $entityManagerService->getRepository(Task::class)
+        );
+        $this->assertEquals(
+            Task::class,
+            $entityManagerService->getRepository(Task::class)->getClassName()
+        );
+    }
+
+    public function getRepositoryDataProvider(){
+        return [
+            [
+                'dbone',
+                'dbone'
+            ],
+            [
+                'dbtwo',
+                'dbtwo'
+            ],
+            [
+                'dbthatdontexist',
+                'dbone'
+            ]
+        ];
+    }
 
 }
