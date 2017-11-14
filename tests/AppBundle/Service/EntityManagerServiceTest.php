@@ -1,18 +1,18 @@
 <?php
 
-namespace AppBundle\Service;
+namespace Tests\AppBundle\Service;
 
 
 use AppBundle\Entity\Task;
 use AppBundle\Repository\TaskRepository;
+use AppBundle\Service\EntityManagerService;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
+use Tests\Common\CustomWebTestCase;
 
-class EntityManagerServiceTest extends WebTestCase
+class EntityManagerServiceTest extends CustomWebTestCase
 {
 
     /** @var  ContainerInterface $container */
@@ -24,6 +24,7 @@ class EntityManagerServiceTest extends WebTestCase
         $kernel->boot();
         self::$container = $kernel->getContainer();
     }
+
 
     /**
      * @dataProvider getDatabaseNameDataProvider
@@ -93,7 +94,7 @@ class EntityManagerServiceTest extends WebTestCase
             ],
             [
                 'dbthatdontexist',
-                'dbone'
+                'dbtest'
             ]
         ];
     }

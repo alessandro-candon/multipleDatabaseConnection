@@ -3,8 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
+use AppBundle\Repository\TaskRepository;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -22,13 +25,15 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/task", name="db_selector")
-     * @param $db
+     * @Route("/tasks", name="task", methods={"GET"} )
      * @return Response
      */
-    public function Action($db)
+    public function getAllTaskAction()
     {
-        $this->get('entity.manager.service')->getRepository(Task::class);
-        return new Response("Selected db $db", 200);
+        /** @var Task[] $tasks */
+        $tasks = $this->get('app.repository.task')->findAll();
+        $tasks = $this->get('serializer')->normalize($tasks);
+
+        return new JsonResponse($tasks);
     }
 }

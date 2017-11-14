@@ -14,3 +14,28 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        default_connection: test
+        connections:
+            test:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "dbtest"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+
+    orm:
+        default_entity_manager: test
+        entity_managers:
+            default:
+                connection: test
+                mappings:
+                    AppBundle: ~
+            test:
+                connection: test
+                mappings:
+                    AppBundle: ~

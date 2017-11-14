@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class EntityManagerService
@@ -29,7 +30,7 @@ class EntityManagerService
     }
 
     /**
-     * @return ObjectManager|EntityManager
+     * @return object
      */
     public function getEntityManager()
     {

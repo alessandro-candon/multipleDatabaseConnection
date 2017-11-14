@@ -4,3 +4,8 @@ services:
         arguments:
           - '@doctrine'
           - '@session'
+
+    app.repository.task:
+        class: AppBundle\Service\EntityManagerService
+        factory: ['@entity.manager.service', getRepository]
+        arguments: ['AppBundle:Task']
