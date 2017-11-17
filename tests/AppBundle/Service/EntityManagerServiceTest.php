@@ -44,15 +44,16 @@ class EntityManagerServiceTest extends CustomWebTestCase
         $this->assertEquals($expected, $entityManagerService->getDatabaseName());
     }
 
-    public function getDatabaseNameDataProvider(){
+    public function getDatabaseNameDataProvider()
+    {
         return [
             [
-                'dbone',
-                'dbone'
+                'es',
+                'es'
             ],
             [
-                'dbtwo',
-                'dbtwo'
+                'it',
+                'it'
             ],
             [
                 'dbthatdontexist',
@@ -78,23 +79,30 @@ class EntityManagerServiceTest extends CustomWebTestCase
             $session
         );
 
-        $this->assertInstanceOf(EntityManager::class, $entityManagerService->getEntityManager());
-        $this->assertEquals($expected, $entityManagerService->getEntityManager()->getConnection()->getDatabase());
+        $this->assertInstanceOf(
+            EntityManager::class, $entityManagerService->getEntityManager()
+        );
+        $this->assertEquals($expected,
+            $entityManagerService
+                ->getEntityManager()
+                ->getConnection()
+                ->getDatabase());
     }
 
-    public function getEntityManagerDataProvider(){
+    public function getEntityManagerDataProvider()
+    {
         return [
             [
-                'dbone',
-                'dbone'
+                'es',
+                'es'
             ],
             [
-                'dbtwo',
-                'dbtwo'
+                'it',
+                'it'
             ],
             [
                 'dbthatdontexist',
-                'dbtest'
+                'test'
             ]
         ];
     }
@@ -128,16 +136,16 @@ class EntityManagerServiceTest extends CustomWebTestCase
     public function getRepositoryDataProvider(){
         return [
             [
-                'dbone',
-                'dbone'
+                'es',
+                'es'
             ],
             [
-                'dbtwo',
-                'dbtwo'
+                'it',
+                'it'
             ],
             [
                 'dbthatdontexist',
-                'dbone'
+                'es'
             ]
         ];
     }

@@ -12,20 +12,6 @@ use Tests\Common\Fixtures\Fixtures;
 abstract class CustomWebTestCase extends WebTestCase
 {
 
-    public static function loadFixtures()
-    {
-        static::bootKernel();
-        $app = new Application(static::$kernel);
-        $app->setAutoExit(false);
-        self::cleanDatabase();
-        $app->run(new ArrayInput([
-            'doctrine:fixtures:load',
-            '--env' => 'test',
-            '--fixtures' => self::$kernel->getRootDir()."/../tests/Common/Fixtures/",
-            '--append' => true
-        ]), new ConsoleOutput());
-    }
-
     public static function cleanDatabase()
     {
         static::bootKernel();
@@ -43,4 +29,18 @@ abstract class CustomWebTestCase extends WebTestCase
             '--env' => 'test',]), new ConsoleOutput());
     }
 
+
+    public static function loadFixtures()
+    {
+        static::bootKernel();
+        $app = new Application(static::$kernel);
+        $app->setAutoExit(false);
+        self::cleanDatabase();
+        $app->run(new ArrayInput([
+            'doctrine:fixtures:load',
+            '--env' => 'test',
+            '--fixtures' => self::$kernel->getRootDir()."/../tests/Common/Fixtures/",
+            '--append' => true
+        ]), new ConsoleOutput());
+    }
 }

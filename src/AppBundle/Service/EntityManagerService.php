@@ -3,10 +3,7 @@
 namespace AppBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class EntityManagerService
@@ -15,17 +12,20 @@ class EntityManagerService
     /** @var Registry $doctrineBundle */
     private $doctrine;
 
-    /** @var  string $forcedDb */
-    private $forcedDb;
-
     /** @var Session $session */
     private $session;
 
+    /**
+     * EntityManagerService constructor.
+     * @param Registry $doctrine
+     * @param Session $session
+     */
     public function __construct(Registry $doctrine, Session $session)
     {
         /** @var Registry doctrine */
         $this->doctrine = $doctrine;
 
+        /** @var Session session */
         $this->session = $session;
     }
 
@@ -66,14 +66,14 @@ class EntityManagerService
         }
         return null;
     }
-
-
-    /**
-     * @param string $force
-     */
-    public function forceDb($force)
-    {
-        $this->forcedDb = $force;
-    }
+//
+//
+//    /**
+//     * @param string $force
+//     */
+//    public function forceDb($force)
+//    {
+//        $this->forcedDb = $force;
+//    }
 
 }
